@@ -2,10 +2,10 @@ use std::io;
 use rand::Rng;
 use std::cmp::Ordering;
 
-fn main() {
-    const MAX_WINS: u32 = 3;
-    const MAX_GUESSES: u32 = 5;
+const MAX_WINS: u32 = 3;
+const MAX_GUESSES: u32 = 5;
 
+fn main() {
     let mut quit = false;
     let mut wins = 0;
 
@@ -63,11 +63,11 @@ fn main() {
             match guess.cmp(&secret_number) {
                 Ordering::Less => {
                     println!("Too small");
-                    check_guesses(total_guesses, MAX_GUESSES, secret_number, &mut auto);
+                    check_guesses(total_guesses, secret_number, &mut auto);
                 },
                 Ordering::Greater => {
                     println!("Too big!");
-                    check_guesses(total_guesses, MAX_GUESSES, secret_number, &mut auto);
+                    check_guesses(total_guesses, secret_number, &mut auto);
                 },
                 Ordering::Equal => {
                     wins += 1;
@@ -79,8 +79,8 @@ fn main() {
     }
 }
 
-fn check_guesses(guesses: u32, max_guesses: u32, secret_number: u32, auto: &mut bool) {
-    if guesses % max_guesses == 0 {
+fn check_guesses(guesses: u32, secret_number: u32, auto: &mut bool) {
+    if guesses % MAX_GUESSES == 0 {
         println!("Guess so far: {guesses}");
         loop {
             println!("Oops, seems like you've run into some trouble.");
